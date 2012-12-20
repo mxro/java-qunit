@@ -3,7 +3,7 @@
 <project>
 	<groupId>com.appjangle.qunit</groupId>
 	<artifactId>qunit-htmlunit-java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<description>Java and JavaScript Utilities to embed QUnit tests in JUnit tests via HTMLUnit.
 	</description>
 
