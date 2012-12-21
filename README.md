@@ -8,6 +8,7 @@ using [opsunit](https://github.com/mxro/opsunit).
 
 ## Related
 
+- [Continuous Integration for QUnit tests](http://www.bitmechanic.com/2009/01/09/continuous-integration-for-qunit-tests.html)
 - [qunit-to-junit-for-phantom.js](https://gist.github.com/1363104)
 - [qunit-maven-plugin](https://bitbucket.org/sebr/qunit-maven-plugin)
 - [Continuous Integration for JavaScript using Bamboo](http://blogs.atlassian.com/2010/01/continuous_integration_javascript_jquery_qunit/)
