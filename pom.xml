@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Template: Source + GWT + in workspace dependencies 27.11.2010 -->
 <project>
-	<groupId>com.appjangle.qunit</groupId>
-	<artifactId>qunit-htmlunit-java</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+		<groupId>com.appjangle.qunit</groupId>
+		<artifactId>qunit-htmlunit-java</artifactId>
+		<version>0.0.2</version>
 	<description>Java and JavaScript Utilities to embed QUnit tests in
 		JUnit tests via HTMLUnit.
 	</description>
