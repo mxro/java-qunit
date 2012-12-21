@@ -4,7 +4,8 @@
 	<groupId>com.appjangle.qunit</groupId>
 	<artifactId>qunit-htmlunit-java</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
-	<description>Java and JavaScript Utilities to embed QUnit tests in JUnit tests via HTMLUnit.
+	<description>Java and JavaScript Utilities to embed QUnit tests in
+		JUnit tests via HTMLUnit.
 	</description>
 
 	<properties>
@@ -29,8 +30,8 @@
 			*
 		</module.importedPackages>
 		<module.exportedPackages>
-		!com.appjangle.qunit.internal*,
-		com.appjangle.qunit*
+			!com.appjangle.qunit.internal*,
+			com.appjangle.qunit*
 		</module.exportedPackages>
 		<module.serviceDefinitions>
 		</module.serviceDefinitions>
@@ -39,23 +40,17 @@
 	<!-- Dependent Modules -->
 	<dependencies>
 
-		
+		<dependency>
+			<groupId>de.mxro.thrd.htmlunit29</groupId>
+			<artifactId>thrdHtmlUnit29</artifactId>
+			<version>[0.0.1,)</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 		</dependency>
-
-		<!-- only for gwt maven plugin!!! -->
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${module.gwtVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-
-
 
 
 	</dependencies>
