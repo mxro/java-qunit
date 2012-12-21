@@ -32,8 +32,6 @@ public class QUnitHtmlUnit {
 					Assert.fail("No QUnit tests ran for [" + pageUrl + "]");
 				}
 
-				// System.out.println(page.asXml());
-
 				for (final HtmlElement liElement : Doj.on(element).get("li")
 						.allElements()) {
 					if (liElement.getAttribute("class").equals("fail")) {
@@ -58,7 +56,7 @@ public class QUnitHtmlUnit {
 										// System.out.println(source.size());
 										Assert.fail("QUnit test failed: "
 												+ spanElement.asText()
-												+ "\nAssertation: "
+												+ "\nAssertion: "
 												+ testMessage.firstElement()
 														.asText()
 												+ "\nSource:\n"

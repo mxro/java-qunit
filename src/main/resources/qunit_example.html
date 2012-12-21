@@ -9,8 +9,13 @@
   <div id="qunit"></div>
   <script src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
   <script>
-  test( "hello test", function() {
-	  ok( 2 == "1", "Passed!" );
+  test( "The passing test", function() {
+	  ok( 1 == "1", "1 should equal 1" );
+	});
+  
+  test( "The failing test", function() {
+	  ok(true, "All ok!");
+	  ok( 2 == "1", "2 should equal 1" );
 	});
   </script>
 </body>
