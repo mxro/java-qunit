@@ -32,16 +32,45 @@ public class QUnitHtmlUnit {
 					Assert.fail("No QUnit tests ran for [" + pageUrl + "]");
 				}
 
-				for (final HtmlElement elem : Doj.on(element).get("li")
+				// System.out.println(page.asXml());
+
+				for (final HtmlElement liElement : Doj.on(element).get("li")
 						.allElements()) {
-					if (elem.getAttribute("class").equals("fail")) {
-						for (final HtmlElement testName : Doj.on(elem)
+					if (liElement.getAttribute("class").equals("fail")) {
+						for (final HtmlElement spanElement : Doj.on(liElement)
 								.get("span").allElements()) {
-							if (testName.getAttribute("class").equals(
+							if (spanElement.getAttribute("class").equals(
 									"test-name")) {
+
+								for (final HtmlElement embeddedLi : Doj
+										.on(liElement).get("ol li")
+										.allElements()) {
+
+									if (embeddedLi.getAttribute("class")
+											.equals("fail")) {
+
+										final Doj testMessage = Doj.on(
+												embeddedLi).get("span");
+
+										// final HtmlElement source = Doj.on(
+										// embeddedLi).allElements()[1];
+
+										// System.out.println(source.size());
+										Assert.fail("QUnit test failed: "
+												+ spanElement.asText()
+												+ "\nAssertation: "
+												+ testMessage.firstElement()
+														.asText()
+												+ "\nSource:\n"
+												+ embeddedLi.asText());
+									}
+								}
+
 								Assert.fail("QUnit test failed: "
-										+ testName.asText());
+										+ spanElement.asText());
+
 							}
+							Assert.fail("QUnit test failed. Could not determine name.");
 						}
 					}
 				}
