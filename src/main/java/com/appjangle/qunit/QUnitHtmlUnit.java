@@ -26,6 +26,15 @@ public class QUnitHtmlUnit {
 
 				Thread.sleep(5000);
 
+				int retriesLeft = 120;
+				while (!page.asText().contains("Tests completed")) {
+					Thread.sleep(1000);
+					retriesLeft--;
+					if (retriesLeft == 0) {
+						Assert.fail("Tests took longer than 120 s to execute.");
+					}
+				}
+
 				final HtmlElement element = page.getHtmlElementById("qunit");
 
 				if (element.getTextContent().indexOf("0 tests of 0") != -1) {
