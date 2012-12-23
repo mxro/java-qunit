@@ -27,6 +27,7 @@
 			io.nextweb.operations.entity,
 			io.nextweb.operations.entitylist,
 			io.nextweb.plugins,
+			org.apache.commons.lang,
 			*
 		</module.importedPackages>
 		<module.exportedPackages>
