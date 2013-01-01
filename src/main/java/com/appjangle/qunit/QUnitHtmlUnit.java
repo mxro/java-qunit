@@ -26,12 +26,12 @@ public class QUnitHtmlUnit {
 
 				Thread.sleep(5000);
 
-				int retriesLeft = 120;
+				int retriesLeft = 240;
 				while (!page.asText().contains("Tests completed")) {
 					Thread.sleep(1000);
 					retriesLeft--;
 					if (retriesLeft == 0) {
-						Assert.fail("Tests took longer than 120 s to execute.");
+						Assert.fail("Tests took longer than 240 s to execute.");
 					}
 				}
 
