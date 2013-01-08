@@ -31,7 +31,7 @@ public class QUnitHtmlUnit {
                 Thread.sleep(5000);
 
                 int retriesLeft = 240;
-                while (!page.asText().contains("Tests completed")) {
+                while (!isTestComplete(page)) {
                     Thread.sleep(1000);
                     retriesLeft--;
                     if (retriesLeft == 0) {
@@ -102,6 +102,12 @@ public class QUnitHtmlUnit {
             throw new RuntimeException(t);
         }
 
+    }
+
+    public static boolean isTestComplete(final HtmlPage page) {
+        final HtmlElement testResult = page.getElementById("qunit-testresult");
+
+        return testResult.asText().contains("Tests completed");
     }
 
 }
