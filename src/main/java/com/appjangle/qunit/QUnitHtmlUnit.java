@@ -5,6 +5,7 @@ import java.util.List;
 import junit.framework.Assert;
 import be.roam.hue.doj.Doj;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -22,7 +23,7 @@ public class QUnitHtmlUnit {
         try {
             WebClient webClient = null;
             try {
-                webClient = new WebClient();
+                webClient = new WebClient(BrowserVersion.FIREFOX_3_6);
 
                 webClient.setTimeout(1000 * 60 * 10);
                 final HtmlPage page = webClient.getPage(pageUrl);
@@ -102,4 +103,5 @@ public class QUnitHtmlUnit {
         }
 
     }
+
 }
