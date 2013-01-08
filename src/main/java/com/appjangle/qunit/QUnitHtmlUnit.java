@@ -1,13 +1,10 @@
 package com.appjangle.qunit;
 
-import java.util.List;
-
 import junit.framework.Assert;
 import be.roam.hue.doj.Doj;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -88,11 +85,6 @@ public class QUnitHtmlUnit {
 
             } finally {
                 if (webClient != null) {
-                    final List<WebWindow> windows = webClient.getWebWindows();
-                    for (final WebWindow wd : windows) {
-
-                        wd.getJobManager().removeAllJobs();
-                    }
 
                     webClient.closeAllWindows();
                 }
