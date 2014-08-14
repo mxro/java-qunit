@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Template: Source + GWT + in workspace dependencies 27.11.2010 -->
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 		<groupId>com.appjangle.qunit</groupId>
 		<artifactId>qunit-htmlunit-java</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
@@ -9,14 +10,7 @@
 	</description>
 
 	<properties>
-		<!-- one.download https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/maven-local-deployment-dirs -->
-		<!-- MAVEN-LOCAL-DEPLOYMENT -->
-		<!-- path for home: C:\Users\Max\Dropbox\Public\onedb\mvn-releases -->
-		<jarDest>C:\Users\mroh004\Dropbox\Public\onedb\mvn-releases</jarDest>
-		<!-- path for home: /C:\Users\Max\Dropbox\Public\onedb\mvn-snapshots -->
-		<jarSnap>C:\Users\mroh004\Dropbox\Public\onedb\mvn-snapshots</jarSnap>
-		<!-- END -->
-		<!-- one.end -->
+		
 
 		<module.gwtVersion>2.2.0</module.gwtVersion>
 		<module.draftCompile>true</module.draftCompile>
@@ -264,5 +258,12 @@
 			<url>${repos.appjangle-snapshots}</url>
 		</snapshotRepository>
 	</distributionManagement>
+	
+	<repositories>
+		<repository>
+			<id>Appjangle Releases</id>
+			<url>http://maven.appjangle.com/appjangle/releases</url>
+		</repository>
+	</repositories>
 
 </project>
