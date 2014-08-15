@@ -1,6 +1,8 @@
 qunit-htmlunit-java
 ===================
 
+[![Build Status](https://travis-ci.org/mxro/qunit-htmlunit-java.svg?branch=master)](https://travis-ci.org/mxro/qunit-htmlunit-java)
+
 Java and JavaScript Utilities to embed [QUnit](http://qunitjs.com/) tests in JUnit tests via HTMLUnit.
 
 These utilities used to test the [Nextweb JavaScript API](http://nextweb.io) implementation provided by [Appjangle](http://appjangle.com) 
