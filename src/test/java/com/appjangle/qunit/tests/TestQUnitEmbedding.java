@@ -18,7 +18,7 @@ public class TestQUnitEmbedding {
 		
 		} catch (Throwable t) {
 			
-			Assert.assertTrue(condition);
+			Assert.assertTrue(t.getMessage().contains("Assertion:"));
 			
 		}
 	}
