@@ -12,7 +12,7 @@ public class TestQUnitEmbedding {
 	public void test_simple_tests() {
 		try {
 		QUnitHtmlUnit
-				.runQUnitTest("file:///"+getClass().getResource("/qunit_example.html").getFile());
+				.runQUnitTest(this, "qunit_example.html");
 		
 		Assert.fail("Test test should have failed since it contained an error.");
 		
