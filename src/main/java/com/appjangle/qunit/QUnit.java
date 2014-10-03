@@ -8,10 +8,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-public class QUnitHtmlUnit {
+public class QUnit {
 
-	 public static void runQUnitTest(final Object context, String resourcePath) {
-		runQUnitTest( "file:///"+context.getClass().getResource("/"+resourcePath).getFile() );
+	 public static void run(final Object context, String resourcePath) {
+		run( "file:///"+context.getClass().getResource("/"+resourcePath).getFile() );
 	 }
 	
     /**
@@ -20,7 +20,7 @@ public class QUnitHtmlUnit {
      * 
      * @param pageUrl
      */
-    public static void runQUnitTest(final String pageUrl) {
+    public static void run(final String pageUrl) {
     	
     	try {
             WebClient webClient = null;

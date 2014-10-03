@@ -4,15 +4,15 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.appjangle.qunit.QUnitHtmlUnit;
+import com.appjangle.qunit.QUnit;
 
 public class TestQUnitEmbedding {
 
 	@Test
 	public void test_simple_tests() {
 		try {
-		QUnitHtmlUnit
-				.runQUnitTest(this, "qunit_example.html");
+		QUnit
+				.run(this, "qunit_example.html");
 		
 		Assert.fail("Test test should have failed since it contained an error.");
 		
