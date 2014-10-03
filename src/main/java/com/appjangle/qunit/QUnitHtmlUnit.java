@@ -17,7 +17,8 @@ public class QUnitHtmlUnit {
      * @param pageUrl
      */
     public static void runQUnitTest(final String pageUrl) {
-        try {
+    	
+    	try {
             WebClient webClient = null;
             try {
                 webClient = new WebClient(BrowserVersion.FIREFOX_3_6);
@@ -63,7 +64,6 @@ public class QUnitHtmlUnit {
                                         // final HtmlElement source = Doj.on(
                                         // embeddedLi).allElements()[1];
 
-                                        // System.out.println(source.size());
                                         Assert.fail("QUnit test failed: "
                                                 + spanElement.asText()
                                                 + "\nAssertion: "
