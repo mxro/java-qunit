@@ -25,7 +25,7 @@ public class QUnitHtmlUnit {
                 webClient.setTimeout(1000 * 60 * 10);
                 final HtmlPage page = webClient.getPage(pageUrl);
 
-                Thread.sleep(5000);
+                Thread.sleep(1000);
 
                 int retriesLeft = 480;
                 while (!isTestComplete(page)) {
