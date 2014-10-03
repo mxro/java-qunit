@@ -10,6 +10,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class QUnitHtmlUnit {
 
+	 public static void runQUnitTest(final Object context, String resourcePath) {
+		runQUnitTest( "file:///"+context.getClass().getResource("/"+resourcePath).getFile() );
+	 }
+	
     /**
      * Will load the specified HTML page, run QUnit tests and throw JUnit
      * assertion errors if any of the QUnit test cases failed.
