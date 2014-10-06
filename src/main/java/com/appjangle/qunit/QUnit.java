@@ -29,6 +29,9 @@ public class QUnit {
                 System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "error");
                 webClient = new WebClient(BrowserVersion.FIREFOX_24);
 
+                webClient.getOptions().setUseInsecureSSL(true);
+                webClient.getOptions().setTimeout(120 * 1000);
+
                 final HtmlPage page = webClient.getPage(pageUrl);
 
                 Thread.sleep(1000);
