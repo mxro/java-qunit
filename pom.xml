@@ -33,17 +33,14 @@
 	<!-- Dependent Modules -->
 	<dependencies>
 
-		<!-- <dependency>
-			<groupId>de.mxro.thrd.htmlunit29</groupId>
-			<artifactId>thrdHtmlUnit29</artifactId>
-			<version>[0.0.1,)</version>
-		</dependency>-->
+		<!-- <dependency> <groupId>de.mxro.thrd.htmlunit29</groupId> <artifactId>thrdHtmlUnit29</artifactId> 
+			<version>[0.0.1,)</version> </dependency> -->
 		<dependency>
-	<groupId>net.sourceforge.htmlunit</groupId>
-	<artifactId>htmlunit</artifactId>
-	<version>2.15</version>
-</dependency>
-		
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<version>2.15</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -126,7 +123,7 @@
 				</executions>
 			</plugin>
 
-			
+
 
 			<!-- Cleanup necessary because of PDE tweaks, clear the project directory -->
 			<plugin>
