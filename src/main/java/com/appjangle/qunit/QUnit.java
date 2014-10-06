@@ -29,6 +29,10 @@ public class QUnit {
                 System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "error");
                 webClient = new WebClient(BrowserVersion.FIREFOX_24);
 
+                /*
+                 * Temporarily required since Godaddy certificates are not added
+                 * to Java correctly.
+                 */
                 webClient.getOptions().setUseInsecureSSL(true);
                 webClient.getOptions().setTimeout(120 * 1000);
 
