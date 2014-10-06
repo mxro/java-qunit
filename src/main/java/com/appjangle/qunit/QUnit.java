@@ -26,9 +26,8 @@ public class QUnit {
         try {
             WebClient webClient = null;
             try {
-                webClient = new WebClient(BrowserVersion.CHROME);
-                // webClient.set
-                // webClient.setTimeout(1000 * 60 * 10);
+                System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "error");
+                webClient = new WebClient(BrowserVersion.FIREFOX_24);
 
                 final HtmlPage page = webClient.getPage(pageUrl);
 
