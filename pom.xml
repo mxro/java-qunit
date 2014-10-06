@@ -33,11 +33,17 @@
 	<!-- Dependent Modules -->
 	<dependencies>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>de.mxro.thrd.htmlunit29</groupId>
 			<artifactId>thrdHtmlUnit29</artifactId>
 			<version>[0.0.1,)</version>
-		</dependency>
+		</dependency>-->
+		<dependency>
+	<groupId>net.sourceforge.htmlunit</groupId>
+	<artifactId>htmlunit</artifactId>
+	<version>2.15</version>
+</dependency>
+		
 
 		<dependency>
 			<groupId>junit</groupId>
