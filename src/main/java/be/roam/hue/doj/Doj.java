@@ -32,10 +32,10 @@ import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Doj is a jQuery-style DOM traversal tool, to be used in conjunction with
- * HtmlUnit's {@link DomElement}.
+ * HtmlUnit's {@link HtmlElement}.
  * <p>
  * The best examples of usage can be found in the unit tests for this class, but
  * here are some pointers.
@@ -146,7 +146,7 @@ public abstract class Doj implements Iterable<Doj> {
      *            start from the back
      * @return the element at the given index, or null if no such element exists
      */
-    public abstract DomElement getElement(int index);
+    public abstract HtmlElement getElement(int index);
 
     /**
      * Creates a new Doj instance by removing the element at the given index
@@ -171,11 +171,11 @@ public abstract class Doj implements Iterable<Doj> {
      * @return new Doj instance
      */
     public Doj merge(final Doj doj) {
-        final List<DomElement> result = new ArrayList<DomElement>();
-        for (final DomElement element : allElements()) {
+        final List<HtmlElement> result = new ArrayList<HtmlElement>();
+        for (final HtmlElement element : allElements()) {
             result.add(element);
         }
-        for (final DomElement element : doj.allElements()) {
+        for (final HtmlElement element : doj.allElements()) {
             result.add(element);
         }
         return on(result);
@@ -186,7 +186,7 @@ public abstract class Doj implements Iterable<Doj> {
      * have the given id.
      * <p>
      * <strong>Note:</strong> due to HtmlUnit's implementation of
-     * {@link DomElement#getElementById(java.lang.String)}, this will not look
+     * {@link HtmlElement#getElementById(java.lang.String)}, this will not look
      * for the element with the given id as a descendant of the context
      * elements, but for the element with the given id. For instance:
      * <code>Doj.on(page).getById("header").getById("header").size()</code> will
@@ -275,7 +275,7 @@ public abstract class Doj implements Iterable<Doj> {
      * <p>
      * Note that in order to function correctly, this method will need to set
      * some data on the element to serve as a hash code - which is missing in
-     * HtmlUnit's {@link DomElement} - but only if there's no id to use.
+     * HtmlUnit's {@link HtmlElement} - but only if there's no id to use.
      * </p>
      * 
      * @return new Doj instance
@@ -943,7 +943,7 @@ public abstract class Doj implements Iterable<Doj> {
      * 
      * @return the first context element (not wrapped)
      */
-    public DomElement firstElement() {
+    public HtmlElement firstElement() {
         return getElement(0);
     }
 
@@ -960,7 +960,7 @@ public abstract class Doj implements Iterable<Doj> {
      * 
      * @return the last context element (not wrapped)
      */
-    public DomElement lastElement() {
+    public HtmlElement lastElement() {
         return getElement(-1);
     }
 
@@ -994,14 +994,14 @@ public abstract class Doj implements Iterable<Doj> {
      *            the number of items to slice
      * @return the context elements from the start index
      */
-    public abstract DomElement[] sliceElements(int startIndex, int nrItems);
+    public abstract HtmlElement[] sliceElements(int startIndex, int nrItems);
 
     /**
      * Returns all context elements.
      * 
      * @return all context elements
      */
-    public DomElement[] allElements() {
+    public HtmlElement[] allElements() {
         return sliceElements(0, size());
     }
 
@@ -1030,7 +1030,7 @@ public abstract class Doj implements Iterable<Doj> {
      *            the context elements to use
      * @return new Doj instance
      */
-    public static Doj on(final DomElement... contextElements) {
+    public static Doj on(final HtmlElement... contextElements) {
         return (contextElements == null || contextElements.length == 0 ? EMPTY : new NonEmptyDoj(contextElements)
         .unique());
     }
@@ -1047,7 +1047,7 @@ public abstract class Doj implements Iterable<Doj> {
      *            the context elements to use
      * @return new Doj instance
      */
-    public static Doj on(final Collection<? extends DomElement> contextElements) {
+    public static Doj on(final Collection<? extends HtmlElement> contextElements) {
         return (contextElements == null || contextElements.isEmpty() ? EMPTY : new NonEmptyDoj(contextElements)
         .unique());
     }
@@ -1098,16 +1098,16 @@ public abstract class Doj implements Iterable<Doj> {
 
     private static class NonEmptyDoj extends Doj {
 
-        protected final DomElement[] contextElements;
+        protected final HtmlElement[] contextElements;
 
         @Override
         public Doj get(final int index) {
-            final DomElement element = getElement(index);
+            final HtmlElement element = getElement(index);
             return element == null ? EMPTY : on(element);
         }
 
         @Override
-        public DomElement getElement(int index) {
+        public HtmlElement getElement(int index) {
             final int size = size();
             if (index < -size || index >= size) {
                 return null;
@@ -1119,8 +1119,8 @@ public abstract class Doj implements Iterable<Doj> {
         @Override
         public Doj unique() {
             final Set<String> retained = new HashSet<String>();
-            final List<DomElement> list = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> list = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 final String identifier = uniqueId(element);
                 if (!retained.contains(identifier)) {
                     retained.add(identifier);
@@ -1134,7 +1134,7 @@ public abstract class Doj implements Iterable<Doj> {
             return list.isEmpty() ? EMPTY : new NonEmptyDoj(list);
         }
 
-        protected String uniqueId(final DomElement element) {
+        protected String uniqueId(final HtmlElement element) {
             String identifier = element.getId();
             if (!StringUtils.isBlank(identifier)) {
                 return identifier;
@@ -1159,7 +1159,7 @@ public abstract class Doj implements Iterable<Doj> {
                 return EMPTY;
             }
             final int indexElementToRemove = (index >= 0 ? index : size + index);
-            final DomElement[] newContextElements = new DomElement[size - 1];
+            final HtmlElement[] newContextElements = new HtmlElement[size - 1];
             for (int loop = 0; loop < size; ++loop) {
                 if (loop == indexElementToRemove) {
                     continue;
@@ -1204,10 +1204,10 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj getById(final String id) {
-            for (final DomElement element : contextElements) {
+            for (final HtmlElement element : contextElements) {
                 try {
 
-                    final DomElement elementWithId = (DomElement) element.querySelector("#" + id);
+                    final HtmlElement elementWithId = (HtmlElement) element.querySelector("#" + id);
                     if (elementWithId != null) {
                         return on(elementWithId);
                     }
@@ -1220,8 +1220,8 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj getByTag(final String tag) {
-            final List<DomElement> list = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> list = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 list.addAll(element.getElementsByTagName(tag));
             }
             return on(list);
@@ -1229,9 +1229,9 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj getByAttribute(final String attribute, final MatchType matchType, final String value) {
-            final List<DomElement> list = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
-                for (final DomElement child : element.getChildElements()) {
+            final List<HtmlElement> list = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
+                for (final HtmlElement child : element.getChildElements()) {
                     if (matchType.isMatch(child.getAttribute(attribute), value)) {
                         list.add(child);
                     }
@@ -1247,7 +1247,7 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public boolean is(final String tag) {
-            for (final DomElement element : contextElements) {
+            for (final HtmlElement element : contextElements) {
                 if (tag.equalsIgnoreCase(element.getTagName())) {
                     return true;
                 }
@@ -1257,8 +1257,8 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj withTag(final String tag) {
-            final List<DomElement> list = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> list = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 if (tag.equalsIgnoreCase(element.getTagName())) {
                     list.add(element);
                 }
@@ -1268,8 +1268,8 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj withAttribute(final String key, final MatchType matchType, final String value) {
-            final List<DomElement> list = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> list = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 if (matchType.isMatch(element.getAttribute(key), value)) {
                     list.add(element);
                 }
@@ -1279,7 +1279,7 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public boolean hasAttribute(final String key, final MatchType matchType, final String value) {
-            for (final DomElement element : contextElements) {
+            for (final HtmlElement element : contextElements) {
                 if (matchType.isMatch(element.getAttribute(key), value)) {
                     return true;
                 }
@@ -1336,7 +1336,7 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj attribute(final String key, final String value) {
-            for (final DomElement element : contextElements) {
+            for (final HtmlElement element : contextElements) {
                 element.setAttribute(key, value);
             }
             return this;
@@ -1344,7 +1344,7 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public String value() {
-            final DomElement first = firstElement();
+            final HtmlElement first = firstElement();
             if ("textarea".equalsIgnoreCase(first.getTagName())) {
                 return ((HtmlTextArea) first).getText();
             }
@@ -1410,7 +1410,7 @@ public abstract class Doj implements Iterable<Doj> {
         }
 
         @Override
-        public DomElement[] sliceElements(int startIndex, int nrItems) {
+        public HtmlElement[] sliceElements(int startIndex, int nrItems) {
             final int size = size();
             if (startIndex < 0) {
                 nrItems = (nrItems > -startIndex ? -startIndex : nrItems);
@@ -1421,39 +1421,39 @@ public abstract class Doj implements Iterable<Doj> {
                 startIndex = size - 1;
             }
             nrItems = Math.min(size - startIndex, nrItems);
-            final DomElement[] result = new DomElement[nrItems];
+            final HtmlElement[] result = new HtmlElement[nrItems];
             for (int index = startIndex; index < nrItems + startIndex; ++index) {
                 result[index - startIndex] = contextElements[index];
             }
             return result;
         }
 
-        public NonEmptyDoj(final DomElement... contextElements) {
+        public NonEmptyDoj(final HtmlElement... contextElements) {
             this.contextElements = contextElements;
         }
 
-        public NonEmptyDoj(final Collection<? extends DomElement> contextElements) {
-            this.contextElements = new DomElement[contextElements.size()];
+        public NonEmptyDoj(final Collection<? extends HtmlElement> contextElements) {
+            this.contextElements = new HtmlElement[contextElements.size()];
             int index = -1;
-            for (final DomElement element : contextElements) {
+            for (final HtmlElement element : contextElements) {
                 this.contextElements[++index] = element;
             }
         }
 
         public NonEmptyDoj(final HtmlPage page) {
-            this.contextElements = new DomElement[] { page.getDocumentElement() };
+            this.contextElements = new HtmlElement[] { page.getDocumentElement() };
         }
 
         @Override
         public Doj next() {
-            final List<DomElement> siblings = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> siblings = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 DomNode node = element.getNextSibling();
                 while (node != null && node.getNodeType() != Node.ELEMENT_NODE) {
                     node = node.getNextSibling();
                 }
                 if (node != null) {
-                    siblings.add((DomElement) node);
+                    siblings.add((HtmlElement) node);
                 }
             }
             return on(siblings);
@@ -1461,15 +1461,15 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj next(final String tag) {
-            final List<DomElement> siblings = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> siblings = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 DomNode node = element.getNextSibling();
                 while (node != null
                         && (node.getNodeType() != Node.ELEMENT_NODE || !node.getNodeName().equalsIgnoreCase(tag))) {
                     node = node.getNextSibling();
                 }
                 if (node != null && node.getNodeName().equalsIgnoreCase(tag)) {
-                    siblings.add((DomElement) node);
+                    siblings.add((HtmlElement) node);
                 }
             }
             return on(siblings);
@@ -1477,14 +1477,14 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj previous() {
-            final List<DomElement> siblings = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> siblings = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 DomNode node = element.getPreviousSibling();
                 while (node != null && node.getNodeType() != Node.ELEMENT_NODE) {
                     node = node.getPreviousSibling();
                 }
                 if (node != null) {
-                    siblings.add((DomElement) node);
+                    siblings.add((HtmlElement) node);
                 }
             }
             return on(siblings);
@@ -1492,15 +1492,15 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj previous(final String tag) {
-            final List<DomElement> siblings = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> siblings = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 DomNode node = element.getPreviousSibling();
                 while (node != null
                         && (node.getNodeType() != Node.ELEMENT_NODE || !node.getNodeName().equalsIgnoreCase(tag))) {
                     node = node.getPreviousSibling();
                 }
                 if (node != null && node.getNodeName().equalsIgnoreCase(tag)) {
-                    siblings.add((DomElement) node);
+                    siblings.add((HtmlElement) node);
                 }
             }
             return on(siblings);
@@ -1508,9 +1508,9 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj parent() {
-            final List<DomElement> parents = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
-                final DomElement parent = (DomElement) element.getParentNode();
+            final List<HtmlElement> parents = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
+                final HtmlElement parent = (HtmlElement) element.getParentNode();
                 if (parent != null) {
                     parents.add(parent);
                 }
@@ -1520,11 +1520,11 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj parent(final String tag) {
-            final List<DomElement> parents = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
-                DomElement parent = (DomElement) element.getParentNode();
+            final List<HtmlElement> parents = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
+                HtmlElement parent = (HtmlElement) element.getParentNode();
                 while (parent != null && !parent.getTagName().equalsIgnoreCase(tag)) {
-                    parent = (DomElement) parent.getParentNode();
+                    parent = (HtmlElement) parent.getParentNode();
                 }
                 if (parent != null) {
                     parents.add(parent);
@@ -1540,7 +1540,7 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj value(final String value) {
-            for (final DomElement element : contextElements) {
+            for (final HtmlElement element : contextElements) {
                 if ("textarea".equalsIgnoreCase(element.getTagName())) {
                     ((HtmlTextArea) element).setText(value);
                 } else if ("select".equalsIgnoreCase(element.getTagName())) {
@@ -1556,8 +1556,8 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj withTextContaining(final String textToContain) {
-            final List<DomElement> retained = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> retained = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 final String text = element.asText();
                 if (text != null && text.contains(textToContain)) {
                     retained.add(element);
@@ -1573,8 +1573,8 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj withTextMatching(final Pattern pattern) {
-            final List<DomElement> retained = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> retained = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 final String text = element.asText();
                 if (text != null && pattern.matcher(text).matches()) {
                     retained.add(element);
@@ -1590,8 +1590,8 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj withAttributeMatching(final String key, final Pattern pattern) {
-            final List<DomElement> list = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
+            final List<HtmlElement> list = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
                 if (pattern.matcher(element.getAttribute(key)).matches()) {
                     list.add(element);
                 }
@@ -1606,9 +1606,9 @@ public abstract class Doj implements Iterable<Doj> {
 
         @Override
         public Doj getByAttributeMatching(final String attribute, final Pattern pattern) {
-            final List<DomElement> list = new ArrayList<DomElement>();
-            for (final DomElement element : contextElements) {
-                for (final DomElement child : element.getChildElements()) {
+            final List<HtmlElement> list = new ArrayList<HtmlElement>();
+            for (final HtmlElement element : contextElements) {
+                for (final HtmlElement child : element.getChildElements()) {
                     if (pattern.matcher(child.getAttribute(attribute)).matches()) {
                         list.add(child);
                     }
@@ -1630,14 +1630,14 @@ public abstract class Doj implements Iterable<Doj> {
         protected Page check(final boolean toCheck) {
             Page page = null;
             Doj matches = this.withType("radio");
-            for (final DomElement radiobutton : matches.allElements()) {
+            for (final HtmlElement radiobutton : matches.allElements()) {
                 final Page temp = ((HtmlRadioButtonInput) radiobutton).setChecked(toCheck);
                 if (page == null) {
                     page = temp;
                 }
             }
             matches = this.withType("checkbox");
-            for (final DomElement checkbox : matches.allElements()) {
+            for (final HtmlElement checkbox : matches.allElements()) {
                 final Page temp = ((HtmlCheckBoxInput) checkbox).setChecked(toCheck);
                 if (page == null) {
                     page = temp;
@@ -1659,7 +1659,7 @@ public abstract class Doj implements Iterable<Doj> {
         protected Page select(final boolean toSelect) {
             Page page = null;
             final Doj matches = this.withTag("option");
-            for (final DomElement option : matches.allElements()) {
+            for (final HtmlElement option : matches.allElements()) {
                 final Page temp = ((HtmlOption) option).setSelected(toSelect);
                 if (page == null) {
                     page = temp;
@@ -1674,7 +1674,7 @@ public abstract class Doj implements Iterable<Doj> {
      */
     private static class EmptyDoj extends Doj {
 
-        private static final DomElement[] EMPTY_ELEMENT_ARRAY = new DomElement[0];
+        private static final HtmlElement[] EMPTY_ELEMENT_ARRAY = new HtmlElement[0];
         private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
         @Override
@@ -1728,7 +1728,7 @@ public abstract class Doj implements Iterable<Doj> {
         }
 
         @Override
-        public DomElement getElement(final int index) {
+        public HtmlElement getElement(final int index) {
             return null;
         }
 
@@ -1803,7 +1803,7 @@ public abstract class Doj implements Iterable<Doj> {
         }
 
         @Override
-        public DomElement[] sliceElements(final int startIndex, final int nrItems) {
+        public HtmlElement[] sliceElements(final int startIndex, final int nrItems) {
             return EMPTY_ELEMENT_ARRAY;
         }
 
