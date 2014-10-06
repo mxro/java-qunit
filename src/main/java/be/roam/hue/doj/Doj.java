@@ -1032,7 +1032,7 @@ public abstract class Doj implements Iterable<Doj> {
      */
     public static Doj on(final DomElement... contextElements) {
         return (contextElements == null || contextElements.length == 0 ? EMPTY : new NonEmptyDoj(contextElements)
-                .unique());
+        .unique());
     }
 
     /**
@@ -1049,7 +1049,7 @@ public abstract class Doj implements Iterable<Doj> {
      */
     public static Doj on(final Collection<? extends DomElement> contextElements) {
         return (contextElements == null || contextElements.isEmpty() ? EMPTY : new NonEmptyDoj(contextElements)
-                .unique());
+        .unique());
     }
 
     /**
@@ -1207,7 +1207,7 @@ public abstract class Doj implements Iterable<Doj> {
             for (final DomElement element : contextElements) {
                 try {
 
-                    final DomElement elementWithId = element.querySelector("#" + id);
+                    final DomElement elementWithId = (DomElement) element.querySelector("#" + id);
                     if (elementWithId != null) {
                         return on(elementWithId);
                     }
