@@ -9,7 +9,6 @@ import com.appjangle.qunit.internal.SslUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class TestSsl {
 
@@ -20,7 +19,7 @@ public class TestSsl {
         SslUtils.allowInsecureSsl(webClient);
         SslUtils.disableSslCertificateValidation();
 
-        final HtmlPage page = webClient.getPage("https://appjangle.com/notyet");
+        webClient.getPage("https://appjangle.com/notyet");
     }
 
 }
