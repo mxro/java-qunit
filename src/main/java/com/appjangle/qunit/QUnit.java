@@ -1,5 +1,15 @@
 package com.appjangle.qunit;
 
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 import junit.framework.Assert;
 import be.roam.hue.doj.Doj;
 
@@ -33,7 +43,9 @@ public class QUnit {
                  * Temporarily required since Godaddy certificates are not added
                  * to Java correctly.
                  */
+                disableSslCertificateValidation();
                 webClient.getOptions().setUseInsecureSSL(true);
+
                 webClient.getOptions().setTimeout(120 * 1000);
 
                 final HtmlPage page = webClient.getPage(pageUrl);
@@ -100,6 +112,42 @@ public class QUnit {
         final DomElement testResult = page.getElementById("qunit-testresult");
 
         return testResult.asText().contains("Tests completed");
+    }
+
+    private final static void disableSslCertificateValidation() {
+
+        final TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+
+            @Override
+            public void checkClientTrusted(final X509Certificate[] certs, final String authType) {
+                // nothing
+            }
+
+            @Override
+            public void checkServerTrusted(final X509Certificate[] certs, final String authType) {
+                // nothing
+            }
+        } };
+
+        final HostnameVerifier hv = new HostnameVerifier() {
+            @Override
+            public boolean verify(final String hostname, final SSLSession session) {
+                // always true
+                return true;
+            }
+        };
+
+        try {
+            final SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(hv);
+        } catch (final Exception e) {
+        }
     }
 
 }
