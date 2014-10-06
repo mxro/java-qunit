@@ -32,6 +32,7 @@ import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
@@ -1032,7 +1033,7 @@ public abstract class Doj implements Iterable<Doj> {
      */
     public static Doj on(final HtmlElement... contextElements) {
         return (contextElements == null || contextElements.length == 0 ? EMPTY : new NonEmptyDoj(contextElements)
-        .unique());
+                .unique());
     }
 
     /**
@@ -1049,7 +1050,7 @@ public abstract class Doj implements Iterable<Doj> {
      */
     public static Doj on(final Collection<? extends HtmlElement> contextElements) {
         return (contextElements == null || contextElements.isEmpty() ? EMPTY : new NonEmptyDoj(contextElements)
-        .unique());
+                .unique());
     }
 
     /**
@@ -1231,9 +1232,11 @@ public abstract class Doj implements Iterable<Doj> {
         public Doj getByAttribute(final String attribute, final MatchType matchType, final String value) {
             final List<HtmlElement> list = new ArrayList<HtmlElement>();
             for (final HtmlElement element : contextElements) {
-                for (final HtmlElement child : element.getChildElements()) {
+                for (final DomElement child : element.getChildElements()) {
                     if (matchType.isMatch(child.getAttribute(attribute), value)) {
-                        list.add(child);
+                        if (child instanceof HtmlElement) {
+                            list.add((HtmlElement) child);
+                        }
                     }
                 }
             }
@@ -1608,9 +1611,11 @@ public abstract class Doj implements Iterable<Doj> {
         public Doj getByAttributeMatching(final String attribute, final Pattern pattern) {
             final List<HtmlElement> list = new ArrayList<HtmlElement>();
             for (final HtmlElement element : contextElements) {
-                for (final HtmlElement child : element.getChildElements()) {
+                for (final DomElement child : element.getChildElements()) {
                     if (pattern.matcher(child.getAttribute(attribute)).matches()) {
-                        list.add(child);
+                        if (child instanceof HtmlElement) {
+                            list.add((HtmlElement) child);
+                        }
                     }
                 }
             }
