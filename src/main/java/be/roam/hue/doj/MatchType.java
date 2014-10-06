@@ -15,11 +15,12 @@
  */
 package be.roam.hue.doj;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
- * Enumeration of the possible match types for attribute selectors as defined
- * in the current version of the W3C CSS 3 working draft.
+ * Enumeration of the possible match types for attribute selectors as defined in
+ * the current version of the W3C CSS 3 working draft.
+ * 
  * @author Kevin Wetzels
  */
 public enum MatchType {
@@ -27,54 +28,54 @@ public enum MatchType {
     EXISTING() {
 
         @Override
-        public boolean isMatch(String value, String valueToLookFor) {
+        public boolean isMatch(final String value, final String valueToLookFor) {
             return !StringUtils.isBlank(value);
         }
     },
     EQUALS() {
 
         @Override
-        public boolean isMatch(String value, String valueToLookFor) {
+        public boolean isMatch(final String value, final String valueToLookFor) {
             return !StringUtils.isBlank(value) && value.equals(valueToLookFor);
         }
     },
     CONTAINED_WITH_WHITESPACE() {
 
         @Override
-        public boolean isMatch(String value, String valueToLookFor) {
+        public boolean isMatch(final String value, final String valueToLookFor) {
             return !StringUtils.isBlank(value) && (" " + value + " ").contains(" " + valueToLookFor + " ");
         }
     },
     STARTING_WITH() {
 
         @Override
-        public boolean isMatch(String value, String valueToLookFor) {
+        public boolean isMatch(final String value, final String valueToLookFor) {
             return !StringUtils.isBlank(value) && value.startsWith(valueToLookFor);
         }
     },
     ENDING_WITH() {
 
         @Override
-        public boolean isMatch(String value, String valueToLookFor) {
+        public boolean isMatch(final String value, final String valueToLookFor) {
             return !StringUtils.isBlank(value) && value.endsWith(valueToLookFor);
         }
     },
     CONTAINING() {
 
         @Override
-        public boolean isMatch(String value, String valueToLookFor) {
+        public boolean isMatch(final String value, final String valueToLookFor) {
             return !StringUtils.isBlank(value) && value.contains(valueToLookFor);
         }
     },
     CONTAINED_WITH_HYPHENS() {
 
         @Override
-        public boolean isMatch(String value, String valueToLookFor) {
+        public boolean isMatch(final String value, final String valueToLookFor) {
             return !StringUtils.isBlank(value) && ("-" + value + "-").contains("-" + valueToLookFor + "-");
         }
     };
 
-    public boolean isMatch(String value, String valueToLookFor) {
+    public boolean isMatch(final String value, final String valueToLookFor) {
         return false;
     }
 }

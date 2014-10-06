@@ -17,19 +17,18 @@ package be.roam.hue.doj;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Selector object and compiler for simple CSS selectors.
+ * 
  * @author Kevin Wetzels
  */
 public class DojCssSelector {
 
     public enum Type {
-        ELEMENT,
-        HTML_CLASS,
-        ID,
-        DESCENDANT
+        ELEMENT, HTML_CLASS, ID, DESCENDANT
     }
 
     private static final DojCssSelector DESCENDANT_SELECTOR = new DojCssSelector(Type.DESCENDANT, " ");
@@ -42,7 +41,7 @@ public class DojCssSelector {
         super();
     }
 
-    public DojCssSelector(Type type, String value) {
+    public DojCssSelector(final Type type, final String value) {
         this.type = type;
         this.value = value;
     }
@@ -55,25 +54,25 @@ public class DojCssSelector {
         return value;
     }
 
-    public List<List<DojCssSelector>> compile(String groupSelector) {
-        List<List<DojCssSelector>> result = new ArrayList<List<DojCssSelector>>();
-        String[] parts = groupSelector.split(",");
+    public List<List<DojCssSelector>> compile(final String groupSelector) {
+        final List<List<DojCssSelector>> result = new ArrayList<List<DojCssSelector>>();
+        final String[] parts = groupSelector.split(",");
         for (String part : parts) {
             part = part.trim();
             if (StringUtils.isBlank(part)) {
                 continue;
             }
-            List<DojCssSelector> compiled = compileSingle(part);
+            final List<DojCssSelector> compiled = compileSingle(part);
             if (!compiled.isEmpty()) {
                 result.add(compiled);
             }
         }
         return result;
     }
-    
-    public List<DojCssSelector> compileSingle(String selector) {
-        List<DojCssSelector> result = new ArrayList<DojCssSelector>();
-        String[] parts = selector.split("\\s");
+
+    public List<DojCssSelector> compileSingle(final String selector) {
+        final List<DojCssSelector> result = new ArrayList<DojCssSelector>();
+        final String[] parts = selector.split("\\s");
         boolean first = true;
         for (String part : parts) {
             part = part.trim();
@@ -85,18 +84,18 @@ public class DojCssSelector {
             } else {
                 result.add(DESCENDANT_SELECTOR);
             }
-            compileSimpleSelector(part, result);            
+            compileSimpleSelector(part, result);
         }
         return result;
     }
 
-    protected void compileSimpleSelector(String selector, List<DojCssSelector> list) {
-        List<String> parts = tokenize(selector);
-        for (String part : parts) {
+    protected void compileSimpleSelector(final String selector, final List<DojCssSelector> list) {
+        final List<String> parts = tokenize(selector);
+        for (final String part : parts) {
             if (part.length() == 0) {
                 continue;
             }
-            int firstCharacter = part.charAt(0);
+            final int firstCharacter = part.charAt(0);
             if (firstCharacter == '.') {
                 list.add(new DojCssSelector(Type.HTML_CLASS, part.substring(1)));
             } else if (firstCharacter == '#') {
@@ -107,11 +106,11 @@ public class DojCssSelector {
         }
     }
 
-    protected List<String> tokenize(String selector) {
-        List<String> tokens = new ArrayList<String>();
+    protected List<String> tokenize(final String selector) {
+        final List<String> tokens = new ArrayList<String>();
         int previous = 0;
         for (int index = 0, max = selector.length(); index < max; ++index) {
-            char character = selector.charAt(index);
+            final char character = selector.charAt(index);
             if (index > 0 && (character == '.' || character == '#')) {
                 tokens.add(selector.substring(previous, index));
                 previous = index;
