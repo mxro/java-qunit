@@ -10,6 +10,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+
 public class SslUtils {
 
     public final static void disableSslCertificateValidation() {
@@ -46,6 +48,10 @@ public class SslUtils {
             HttpsURLConnection.setDefaultHostnameVerifier(hv);
         } catch (final Exception e) {
         }
+    }
+
+    public static void allowInsecureSsl(WebClient webClient) {
+        webClient.getOptions().setUseInsecureSSL(true);
     }
 
 }

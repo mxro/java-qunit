@@ -35,7 +35,7 @@ public class QUnit {
                  * to Java correctly.
                  */
                 SslUtils.disableSslCertificateValidation();
-                webClient.getOptions().setUseInsecureSSL(true);
+                SslUtils.allowInsecureSsl(webClient);
 
                 webClient.getOptions().setTimeout(120 * 1000);
 

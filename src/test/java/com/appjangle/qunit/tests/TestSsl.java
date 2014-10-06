@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 
 import org.junit.Test;
 
+import com.appjangle.qunit.internal.SslUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -15,6 +16,9 @@ public class TestSsl {
     @Test
     public void test() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
         final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_24);
+
+        SslUtils.allowInsecureSsl(webClient);
+        SslUtils.disableSslCertificateValidation();
 
         final HtmlPage page = webClient.getPage("https://appjangle.com/notyet");
     }
