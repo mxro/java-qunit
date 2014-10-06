@@ -1206,7 +1206,7 @@ public abstract class Doj implements Iterable<Doj> {
         public Doj getById(final String id) {
             for (final DomElement element : contextElements) {
                 try {
-                    final DomElement elementWithId = element.getElementById(id);
+                    final DomElement elementWithId = element.getElementsByTagName(id).get(0);
                     if (elementWithId != null) {
                         return on(elementWithId);
                     }
