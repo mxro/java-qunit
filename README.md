@@ -33,7 +33,7 @@ Create a new JUnit test in `src/main/test` and add this statement to the test:
    
 (see [TestQUnitEmbedding.java](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/test/java/com/appjangle/qunit/tests/TestQUnitEmbedding.java))
 
-
+If any of the QUnit tests fail, the respective JUnit test case will fail as well.
 
 ## Related
 
