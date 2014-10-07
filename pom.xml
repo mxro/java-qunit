@@ -12,6 +12,7 @@
 	<properties>
 		<module.gwtVersion>2.5.1</module.gwtVersion>
 		<module.draftCompile>true</module.draftCompile>
+		<module.clientVersion>0.3.5</module.clientVersion>
 		<module.importedPackages>
 			org.junit,
 			io.nextweb.operations,
