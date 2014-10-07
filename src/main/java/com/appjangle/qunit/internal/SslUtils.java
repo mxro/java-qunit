@@ -15,24 +15,24 @@ import com.gargoylesoftware.htmlunit.WebClient;
 public class SslUtils {
 
     public final static void disableSslCertificateValidation() {
-    
+
         final TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
             @Override
             public X509Certificate[] getAcceptedIssuers() {
                 return new X509Certificate[0];
             }
-    
+
             @Override
             public void checkClientTrusted(final X509Certificate[] certs, final String authType) {
                 // nothing
             }
-    
+
             @Override
             public void checkServerTrusted(final X509Certificate[] certs, final String authType) {
                 // nothing
             }
         } };
-    
+
         final HostnameVerifier hv = new HostnameVerifier() {
             @Override
             public boolean verify(final String hostname, final SSLSession session) {
@@ -40,18 +40,20 @@ public class SslUtils {
                 return true;
             }
         };
-    
+
         try {
             final SSLContext sc = SSLContext.getInstance("SSL");
             sc.init(null, trustAllCerts, new SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
             HttpsURLConnection.setDefaultHostnameVerifier(hv);
+
         } catch (final Exception e) {
         }
     }
 
-    public static void allowInsecureSsl(WebClient webClient) {
+    public static void allowInsecureSsl(final WebClient webClient) {
         webClient.getOptions().setUseInsecureSSL(true);
+
     }
 
 }
