@@ -27,11 +27,12 @@ Add maven repository:
 
 Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/main/resources/qunit_example.html)) in `src/main/resources`.
 
+Create a new JUnit test in `src/main/test` and add this statement to the test:
 
+   QUnit.run(this, "qunit_example.html");
+   
+(see [TestQUnitEmbedding.java](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/test/java/com/appjangle/qunit/tests/TestQUnitEmbedding.java))
 
-Create a new JUnit test and add call to `QUnit.run(final String pageUrl)` while replacing `pageUrl` the path to your page (see example [TestQUnitEmbedding.java](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/test/java/com/appjangle/qunit/tests/TestQUnitEmbedding.java)).
-
-(If you are worried about maintaining the path to your test, consider uploading it to the web using [textsync](http://textsync.blogspot.com).)
 
 
 ## Related
