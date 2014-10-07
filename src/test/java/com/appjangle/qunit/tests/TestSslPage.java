@@ -10,7 +10,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-public class TestSsl {
+public class TestSslPage {
 
     @Test
     public void test() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
