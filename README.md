@@ -14,8 +14,8 @@ Link the maven dependency:
 
     <dependency>
 		<groupId>com.appjangle.qunit</groupId>
-		<artifactId>qunit-htmlunit-java</artifactId>
-		<version>0.0.2</version>
+		<artifactId>java-qunit</artifactId>
+		<version>[0.0.3,)</version>
     <dependency>
 
 Add maven repository:
@@ -25,12 +25,13 @@ Add maven repository:
         <url>http://dl.dropbox.com/u/957046/onedb/mvn-releases</url>
     </repository>
 
-Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/main/resources/qunit_example.html)) .
+Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/main/resources/qunit_example.html)) in `src/main/resources`.
 
-Create a new JUnit test and add call to `QUnitHtmlUnit.runQUnitTest(final String pageUrl)` while replacing `pageUrl` the path to your page (see example [TestQUnitEmbedding.java](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/test/java/com/appjangle/qunit/tests/TestQUnitEmbedding.java)).
+
+
+Create a new JUnit test and add call to `QUnit.run(final String pageUrl)` while replacing `pageUrl` the path to your page (see example [TestQUnitEmbedding.java](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/test/java/com/appjangle/qunit/tests/TestQUnitEmbedding.java)).
 
 (If you are worried about maintaining the path to your test, consider uploading it to the web using [textsync](http://textsync.blogspot.com).)
-
 
 
 ## Related
