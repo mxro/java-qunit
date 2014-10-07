@@ -5,7 +5,7 @@
 	<groupId>com.appjangle.qunit</groupId>
 	<artifactId>java-qunit</artifactId>
 	<version>0.0.5-SNAPSHOT</version>
-	<description>Java and JavaScript Utilities to embed QUnit tests in
+	<description>Java and JavaScript utilities to embed QUnit tests in
 		JUnit tests via HTMLUnit.
 	</description>
 
@@ -33,8 +33,6 @@
 	<!-- Dependent Modules -->
 	<dependencies>
 
-		<!-- <dependency> <groupId>de.mxro.thrd.htmlunit29</groupId> <artifactId>thrdHtmlUnit29</artifactId> 
-			<version>[0.0.1,)</version> </dependency> -->
 		<dependency>
 			<groupId>net.sourceforge.htmlunit</groupId>
 			<artifactId>htmlunit</artifactId>
@@ -42,11 +40,11 @@
 		</dependency>
 
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>junit</groupId>
