@@ -43,6 +43,9 @@ public class QUnit {
 
                 Thread.sleep(1000);
 
+                /*
+                 * Set a limit of how long to wait for test completion.
+                 */
                 int retriesLeft = 1024;
                 while (!isTestComplete(page)) {
                     Thread.sleep(1000);
