@@ -43,12 +43,12 @@ public class QUnit {
 
                 Thread.sleep(1000);
 
-                int retriesLeft = 480;
+                int retriesLeft = 1024;
                 while (!isTestComplete(page)) {
                     Thread.sleep(1000);
                     retriesLeft--;
                     if (retriesLeft == 0) {
-                        Assert.fail("Tests took longer than 480 s to execute.");
+                        Assert.fail("Tests took longer than 1024 s to execute.");
                     }
                 }
 
