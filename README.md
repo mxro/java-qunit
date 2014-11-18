@@ -10,7 +10,7 @@ using [opsunit](https://github.com/mxro/opsunit).
 
 ## Usage
 
-Link the maven dependency:
+Link the Maven dependency:
 
     <dependency>
 		<groupId>com.appjangle.qunit</groupId>
@@ -18,12 +18,12 @@ Link the maven dependency:
 		<version>[0.0.3,)</version>
     <dependency>
 
-Add maven repository:
+Add Maven repository:
 
     <repository>
-        <id>onedb Releases</id>
-        <url>http://dl.dropbox.com/u/957046/onedb/mvn-releases</url>
-    </repository>
+		<id>Appjangle Releases</id>
+		<url>http://maven.appjangle.com/appjangle/releases</url>
+	</repository>
 
 Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/java-qunit/blob/master/src/test/resources/qunit_example.html)) in `src/main/resources`.
 
