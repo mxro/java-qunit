@@ -25,7 +25,7 @@ Add maven repository:
         <url>http://dl.dropbox.com/u/957046/onedb/mvn-releases</url>
     </repository>
 
-Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/java-qunit/blob/master/src/main/resources/qunit_example.html)) in `src/main/resources`.
+Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/java-qunit/blob/master/src/test/resources/qunit_example.html)) in `src/main/resources`.
 
 Create a new JUnit test in `src/main/test` and add this statement to the test:
 
