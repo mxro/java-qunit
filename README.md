@@ -1,4 +1,4 @@
-qunit-htmlunit-java
+java-qunit
 ===================
 
 [![Build Status](https://travis-ci.org/mxro/java-qunit.svg?branch=master)](https://travis-ci.org/mxro/java-qunit)
@@ -25,13 +25,13 @@ Add maven repository:
         <url>http://dl.dropbox.com/u/957046/onedb/mvn-releases</url>
     </repository>
 
-Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/main/resources/qunit_example.html)) in `src/main/resources`.
+Create a new HTML page with QUnit tests ([see example](https://github.com/mxro/java-qunit/blob/master/src/main/resources/qunit_example.html)) in `src/main/resources`.
 
 Create a new JUnit test in `src/main/test` and add this statement to the test:
 
    QUnit.run(this, "qunit_example.html");
    
-(see [TestQUnitEmbedding.java](https://github.com/mxro/qunit-htmlunit-java/blob/master/src/test/java/com/appjangle/qunit/tests/TestQUnitEmbedding.java))
+(see [TestQUnitEmbedding.java](https://github.com/mxro/java-qunit/blob/master/src/test/java/com/appjangle/qunit/tests/TestQUnitEmbedding.java))
 
 If any of the QUnit tests fail, the respective JUnit test case will fail as well.
 
