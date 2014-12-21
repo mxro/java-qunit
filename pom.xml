@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<groupId>com.appjangle.qunit</groupId>
 	<artifactId>java-qunit</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>0.0.7</version>
 	<description>Java and JavaScript utilities to embed QUnit tests in
 		JUnit tests via HTMLUnit.
 	</description>
