@@ -37,7 +37,7 @@ If any of the QUnit tests fail, the respective JUnit test case will fail as well
 
 ## Related
 
-- (Doj)[http://code.google.com/p/hue/wiki/Doj]
+- [Doj](http://code.google.com/p/hue/wiki/Doj)
 - [Continuous Integration for QUnit tests](http://www.bitmechanic.com/2009/01/09/continuous-integration-for-qunit-tests.html)
 - [qunit-to-junit-for-phantom.js](https://gist.github.com/1363104)
 - [qunit-maven-plugin](https://bitbucket.org/sebr/qunit-maven-plugin)
