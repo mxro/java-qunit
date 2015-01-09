@@ -1,4 +1,4 @@
-java-qunit
+Java QUnit
 ===================
 
 [![Build Status](https://travis-ci.org/mxro/java-qunit.svg?branch=master)](https://travis-ci.org/mxro/java-qunit)
