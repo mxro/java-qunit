@@ -1,14 +1,14 @@
 package com.appjangle.qunit;
 
-import junit.framework.Assert;
-import be.roam.hue.doj.Doj;
-
 import com.appjangle.qunit.internal.SslUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
+import be.roam.hue.doj.Doj;
+import junit.framework.Assert;
 
 public class QUnit {
 
