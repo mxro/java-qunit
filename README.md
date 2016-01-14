@@ -16,7 +16,7 @@ Link the Maven dependency:
 		<groupId>com.appjangle.qunit</groupId>
 		<artifactId>java-qunit</artifactId>
 		<version>[0.0.3,)</version>
-    <dependency>
+    </dependency>
 
 Add Maven repository:
 
